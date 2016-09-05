@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mvalho</groupId>
-	<artifactId>spring-boot-with-jpa</artifactId>
+	<artifactId>spring-boot-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Spring Boot With JPA</name>
-	<description>This project uses spring boot with basic JPA configuration</description>
+	<name>Spring Boot Web</name>
+	<description>This project shows how to simply add Spring MVC functionalities to a Spring Boot project</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
