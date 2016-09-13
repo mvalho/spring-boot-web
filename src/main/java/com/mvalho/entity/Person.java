@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -23,9 +26,12 @@ public class Person {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "person_id")
 	private Long id;
+	
+	@NotBlank
 	private String name;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	private Calendar dateOfBirth;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="person", fetch = FetchType.EAGER) //Just be more convenient.
