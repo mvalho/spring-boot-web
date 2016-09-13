@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Web - Person Index.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Person Admin</h1>
+		<p th:text="${'This is the main page for Person. Here you going to admin everything relationed with Person'}"></p>
+		<div class="btn-group btn-group-justified">
+			<a th:href="'/person/add'" class="btn btn-primary">Add New Person</a>
+		</div>
+		<h2>List of Persons</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th width="120px">Date of Birth</th>
+					<th width="300px">First Contact</th>
+					<th width="50px"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="person : ${listOfPersons}">
+					<td th:text="${person.name}"></td>
+					<td th:text="${person.dateOfBirth}"></td>
+					<td th:text="${person.firstContact}"></td>
+					<td>
+						<div class="btn-group btn-group-justified">
+							<a title="Edit" th:href="'/person/edit/' + ${person.id}" class="btn btn-primary btn-sm">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+							<a title="Delete" th:href="'/person/delete/' + ${person.id}" class="btn btn-danger btn-sm">
+								<span class="glyphicon glyphicon-remove"></span>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
