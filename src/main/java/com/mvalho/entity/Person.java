@@ -31,7 +31,7 @@ public class Person {
 	private String name;
 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/YYYY")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar dateOfBirth;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="person", fetch = FetchType.EAGER) //Just be more convenient.
@@ -68,6 +68,10 @@ public class Person {
 	}
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
+	}
+	
+	public String firstContact() {
+		return contacts != null && !contacts.isEmpty() ? contacts.get(0).getValue() : null;
 	}
 	
 	@Override
