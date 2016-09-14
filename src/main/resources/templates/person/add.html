@@ -11,18 +11,36 @@
 	<div class="container">
 		<h1>Person Admin</h1>
 		<p th:text="${'This is the main page for Person. Here you going to admin everything relationed with Person'}"></p>
-		<form name='form' th:action="@{/person/add}" th:object="${person}" method='POST' role="form" class="form-inline">
+		<form name='form' th:action="@{/person/add}" th:object="${person}" method='POST' role="form">
 			<input type='hidden' id='metodo_id' th:field="*{id}" />
 			<div class="form-group">
-				<label for="personName">Name</label> 
+				<label for="personName">Name:</label> 
 				<input type='text' id='personName' name="personName" class="form-control" placeholder="Type your fullname" th:field="*{name}" size="150" />
 			</div>
 			<div class="form-group">
-				<label for="personDateOfBirth">Date Of Birth</label> 
-				<input type="date" id='personDateOfBirth' name="personDateOfBirth" class="form-control" th:field="*{dateOfBirth}" size="10" />
+				<label for="personDateOfBirth">Date Of Birth:</label> 
+				<input type="date" id='personDateOfBirth' name="personDateOfBirth" class="form-control" th:field="*{dateOfBirth}" placeholder="dd/MM/yyyy" size="10" />
 			</div>
 			
-			<button type="submit" id="criar_classe" class="btn btn-primary">salvar</button>
+			<div class="form-group">
+				<input type='hidden' value="EMAIL" th:field="*{contacts[0].type}" />
+				<label for="contacts[0].value">E-mail: </label> 
+				<input type='email' th:field="*{contacts[0].value}" class="form-control" placeholder="email@email.com" size="150px" />
+			</div>
+			
+			<div class="form-group">
+				<input type='hidden' value="PHONE" th:field="*{contacts[1].type}" />
+				<label for="contacts[1].value">Phone: </label> 
+				<input type='tel' th:field="*{contacts[1].value}" class="form-control" placeholder="+00" size="150px" />
+			</div>
+			
+			<div class="form-group">
+				<input type='hidden' value="CELLPHONE" th:field="*{contacts[2].type}" />
+				<label for="contacts[2].value">Cellphone: </label> 
+				<input type='tel' th:field="*{contacts[2].value}" class="form-control" placeholder="+00" size="150px" />
+			</div>
+			
+			<button type="submit" id="save" class="btn btn-primary">save</button>
 		</form>
 	</div>
 </body>

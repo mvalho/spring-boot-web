@@ -21,14 +21,14 @@
 					<th>Name</th>
 					<th width="120px">Date of Birth</th>
 					<th width="300px">First Contact</th>
-					<th width="50px"></th>
+					<th width="70px"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="person : ${listOfPersons}">
 					<td th:text="${person.name}"></td>
-					<td th:text="${person.dateOfBirth}"></td>
-					<td th:text="${person.firstContact}"></td>
+					<td th:text="${person.dateOfBirth.time}"></td>
+					<td th:text="${person.firstContact()}"></td>
 					<td>
 						<div class="btn-group btn-group-justified">
 							<a title="Edit" th:href="'/person/edit/' + ${person.id}" class="btn btn-primary btn-sm">
