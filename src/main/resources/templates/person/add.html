@@ -23,19 +23,22 @@
 			</div>
 			
 			<div class="form-group">
-				<input type='hidden' value="EMAIL" th:field="*{contacts[0].type}" />
+				<input type='hidden' th:value="EMAIL" name="contacts[0].type" />
+				<input type='hidden' th:field="*{contacts[0].id}" />
 				<label for="contacts[0].value">E-mail: </label> 
 				<input type='email' th:field="*{contacts[0].value}" class="form-control" placeholder="email@email.com" size="150px" />
 			</div>
 			
 			<div class="form-group">
-				<input type='hidden' value="PHONE" th:field="*{contacts[1].type}" />
+				<input type='hidden' th:value="PHONE" name="contacts[1].type" />
+				<input type='hidden' th:field="*{contacts[1].id}" />
 				<label for="contacts[1].value">Phone: </label> 
 				<input type='tel' th:field="*{contacts[1].value}" class="form-control" placeholder="+00" size="150px" />
 			</div>
 			
 			<div class="form-group">
-				<input type='hidden' value="CELLPHONE" th:field="*{contacts[2].type}" />
+				<input type='hidden' th:value="CELLPHONE" name="contacts[2].type" />
+				<input type='hidden' th:field="*{contacts[2].id}" />
 				<label for="contacts[2].value">Cellphone: </label> 
 				<input type='tel' th:field="*{contacts[2].value}" class="form-control" placeholder="+00" size="150px" />
 			</div>
