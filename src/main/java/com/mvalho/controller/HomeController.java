@@ -9,9 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController{
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView mav) throws Exception {
-		mav.setViewName("home/index");
-		
-		return mav;
+	public ModelAndView index() throws Exception {
+		return new ModelAndView("home/index");
 	}
 }

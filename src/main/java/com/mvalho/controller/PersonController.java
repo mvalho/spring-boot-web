@@ -35,20 +35,22 @@ public class PersonController {
 	private PersonRepository personRepository;
 	
 	@RequestMapping(value = INDEX, method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView mav) {
+	public ModelAndView index() {
+		ModelAndView mav = new ModelAndView(PERSON_INDEX);
 		mav.addObject(LIST_OF_PERSONS, this.personRepository.findAll());
-		mav.setViewName(PERSON_INDEX);
 		
 		return mav;
 	}
 	
 	@RequestMapping(value = ADD, method = RequestMethod.GET)
-	public ModelAndView addEdit(ModelAndView mav) {
-		Person person = new Person();
-		person.setContacts(new ArrayList<Contact>());
+	public ModelAndView addOrEdit(ModelAndView mav) {
+		Person person = null;
 		
 		if(mav.getModelMap().containsKey(PERSON)) {
 			person = (Person) mav.getModelMap().get(PERSON);
+		} else {
+			person = new Person();
+			person.setContacts(new ArrayList<Contact>());
 		}
 		
 		mav.addObject(PERSON, person);
@@ -57,37 +59,38 @@ public class PersonController {
 	}
 	
 	@RequestMapping(value = ADD, method = RequestMethod.POST)
-	public ModelAndView save(Person person, ModelAndView mav) {
+	public ModelAndView save(Person person) {
 		addPersonToContact(person);
 		this.personRepository.save(person);
-		mav.setViewName(REDIRECT_PERSON + INDEX);
-		return mav;
-	}
-	
-	private void addPersonToContact(Person person) {
-		person.getContacts().stream().forEach(c -> c.setPerson(person));
+		
+		return new ModelAndView(REDIRECT_PERSON + INDEX);
 	}
 
 	@RequestMapping(value = EDIT_PERSON_ID, method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable("personId") Long id, ModelAndView mav) throws NotFoundException {
+	public ModelAndView edit(@PathVariable("personId") Long id) throws NotFoundException {
 		if(this.personRepository.exists(id)) {
+			ModelAndView mav = new ModelAndView();
 			mav.addObject(PERSON, this.personRepository.findOne(id));
-			return addEdit(mav);
+			return addOrEdit(mav);
 		} else {
 			throw new NotFoundException(NOT_FOUND_MSG + id);
 		}
 	}
 	
 	@RequestMapping(value = DELETE_PERSON_ID, method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable("personId") Long id, ModelAndView mav) throws NotFoundException {
+	public ModelAndView delete(@PathVariable("personId") Long id) throws NotFoundException {
 		if(this.personRepository.exists(id)) {
 			this.personRepository.delete(id);
+			ModelAndView mav = new ModelAndView(REDIRECT_PERSON + INDEX);
 			mav.addObject(SUCCESS_KEY, SUCCESS_MSG);
-			mav.setViewName(REDIRECT_PERSON + INDEX);
 			
 			return mav;
 		} else {
 			throw new NotFoundException(NOT_FOUND_MSG + id);
 		}
+	}
+	
+	private void addPersonToContact(Person person) {
+		person.getContacts().stream().forEach(c -> c.setPerson(person));
 	}
 }
