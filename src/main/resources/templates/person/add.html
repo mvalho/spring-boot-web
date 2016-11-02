@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title></title>
+<title>Spring Boot Web - Person Add.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -9,8 +9,16 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Person Admin</h1>
-		<p th:text="${'This is the main page for Person. Here you going to admin everything relationed with Person'}"></p>
+		<div th:if="${person.id} == null">
+			<h1>Person Create</h1>
+			<p th:if="${person.id} == null">In this page you will create a new Person on the System</p>
+		</div>
+		
+		<div th:if="${person.id} != null">
+			<h1>Person Edit</h1>
+			<p th:if="${person.id} != null" th:text="'You are editing '+ ${person.name} +' with id ' + ${person.id}"></p>
+		</div>
+		
 		<form name='form' th:action="@{/person/add}" th:object="${person}" method='POST' role="form">
 			<input type='hidden' id='metodo_id' th:field="*{id}" />
 			<div class="form-group">
